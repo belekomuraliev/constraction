@@ -7,6 +7,7 @@ class Block(models.Model):
     amount_entry = models.IntegerField(verbose_name='Колличество подъезда')
     amount_apartments_floor = models.IntegerField(verbose_name='Колличество квартир на этаж')
     ammount_floors = models.IntegerField(verbose_name='Колличество этажей', default=9)
+    client = models.ForeignKey('Client', on_delete=models.CASCADE, related_name='rel_client', default=1)
 
     def __str__(self):
         return str(self.block_number)
@@ -14,7 +15,7 @@ class Block(models.Model):
     @admin.display(description='общая сумма в Блоке')
     def total_sum(self):
 
-        return self.price_m * self.amount_apartments_floor * self.ammount_floors * self.price_m
+        return self.client.total_area*self.price_m*self.amount_entry*self.amount_apartments_floor*self.ammount_floors
 
 class Client(models.Model):
     owner = models.CharField(max_length=20, verbose_name='ФИО владельца')

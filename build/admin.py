@@ -19,9 +19,6 @@ class BlockAdmin(admin.ModelAdmin):
         return f'{obj.amount_apartments_floor  * obj.ammount_floors} квартир в блоке № {obj.block_number}'
 
 
-
-
-
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
     date_hierarchy = 'sale_date'
